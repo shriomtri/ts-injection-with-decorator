@@ -1,5 +1,5 @@
 import { find } from "lodash";
-import { LooseObject } from "./types";
+import { LooseClass, LooseObject } from "./types";
 
 export class Container {
   private _providers: LooseObject = {}
@@ -15,6 +15,10 @@ export class Container {
     } else {
       throw new Error(`No provider found for ${token}`)
     }
+  }
+
+  public reserve(token: string, target: LooseClass) {
+    container._providers[token] = new target()
   }
 }
 

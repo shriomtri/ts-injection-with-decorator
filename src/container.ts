@@ -1,6 +1,10 @@
 import { find } from "lodash";
 import { LooseClass, LooseObject } from "./types";
 
+export interface IContainerProvider {
+  userValue: any;
+  token: string;
+}
 export class Container {
   private _providers: LooseObject = {}
 
@@ -19,6 +23,10 @@ export class Container {
 
   public reserve(token: string, target: LooseClass) {
     container._providers[token] = new target()
+  }
+
+  public provider(details: IContainerProvider): void {
+    this._providers[details.token] = details.userValue
   }
 }
 

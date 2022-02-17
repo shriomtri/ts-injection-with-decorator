@@ -1,15 +1,20 @@
 {
   "name": "ts-inject",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "typescript injection with decorator",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prestart": "tsc",
+    "start" : "node dist/",
+    "start:debug": "ts-node src/"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["ts","decorator","injection"],
+  "author": "shriom",
   "license": "ISC",
   "dependencies": {
     "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "ts-node": "^10.5.0",
+    "typescript": "^4.5.5"
   }
 }

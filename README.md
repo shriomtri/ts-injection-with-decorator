@@ -38,40 +38,6 @@ With our dependency injection service, to make a class available for dependency 
 
 To inject other classes in to our class, we will use an `@Inject` decorator on a class property that takes the token of the desired class as an argument and fetches the respective class from the global container. Our dependency tree can go as deep as possible, with classes that are injected also being able to inject other classes.
 
-
-Let’s have a look at what our final product will be when we consume our service:
-
-##### index.ts
-
-    import { Inject } from '../decorators/inject';
-    import { Injectable } from '../decorators/injectable';
-    import { container } from '../instances/container';
-    
-    @Injectable('testService')
-    export class TestService {
-      public log(msg: string): void {
-        console.log(msg);
-      }
-    }
-    
-    @Injectable('consumer')
-    export class Consumer {
-      @Inject('testService') private testService;
-    
-      constructor() {
-        this.testService.log('Hey!');
-      }
-    }
-    
-    container.resolve('consumer');
-    
-
-In this code, you can see that you can inject services with dependencies of their own. By making our `Consumer` class an injectable, that also means that we can resolve that with the container instead of using `new`.
-
-In our consumer class, we make a call to our `TestService` which will log to the console. The great thing is, they have no knowledge of the implementation of each other - this means that we can swap out our `TestService` for a different implementation as long as it matches the original interface.
-
-Now, let’s break it down and see how we can make this work.
-
 Building our container
 ----------------------
 
